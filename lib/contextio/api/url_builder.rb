@@ -2,6 +2,7 @@ require 'contextio/connect_token_collection'
 require 'contextio/oauth_provider_collection'
 require 'contextio/email_settings'
 require 'contextio/account_collection'
+require 'contextio/user_collection'
 require 'contextio/source_collection'
 require 'contextio/folder_collection'
 require 'contextio/message_collection'
@@ -56,6 +57,8 @@ class ContextIO
       register_url ContextIO::ConnectTokenCollection do |connect_tokens|
         if connect_tokens.account && connect_tokens.account.id
           "accounts/#{connect_tokens.account.id}/connect_tokens"
+        elsif connect_tokens.user && connect_tokens.user.id
+          "users/#{connect_tokens.user.id}/connect_tokens"
         else
           'connect_tokens'
         end
@@ -79,6 +82,14 @@ class ContextIO
 
       register_url ContextIO::AccountCollection do
         'accounts'
+      end
+
+      register_url ContextIO::User do |user|
+        "accounts/#{user.id}"
+      end
+
+      register_url ContextIO::UserCollection do
+        'users'
       end
 
       register_url ContextIO::Source do |source|

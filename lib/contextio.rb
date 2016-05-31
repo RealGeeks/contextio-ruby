@@ -46,6 +46,10 @@ class ContextIO
     AccountCollection.new(api)
   end
 
+  def users
+    UserCollection.new(api)
+  end
+
   # Discover the IMAP settings for an email account.
   #
   # @param [String] email_address The email address in question.
@@ -74,3 +78,4 @@ require_relative 'contextio/body_part_collection'
 require_relative 'contextio/thread_collection'
 require_relative 'contextio/webhook_collection'
 require_relative 'contextio/contact_collection'
+require_relative 'contextio/user_collection'

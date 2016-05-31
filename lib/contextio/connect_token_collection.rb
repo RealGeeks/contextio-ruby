@@ -19,6 +19,7 @@ class ContextIO
     self.association_name = :connect_tokens
 
     belongs_to :account
+    belongs_to :user
 
     # Creates a new connect token for your account.
     #

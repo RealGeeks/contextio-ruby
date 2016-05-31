@@ -7,7 +7,7 @@ class ContextIO
     include ContextIO::API::Resource
 
     self.primary_key = :id
-    self.association_name = :account
+    self.association_name = :user
 
     has_many :sources
     has_many :connect_tokens
@@ -18,13 +18,13 @@ class ContextIO
     has_many :files
 
     # @!attribute [r] id
-    #   @return [String] The id assigned to this account by Context.IO.
+    #   @return [String] The id assigned to this user by Context.IO.
     # @!attribute [r] username
-    #   @return [String] The username assigned to this account by Context.IO.
+    #   @return [String] The username assigned to this user by Context.IO.
     # @!attribute [r] first_name
-    #   @return [String] The account holder's first name.
+    #   @return [String] The user holder's first name.
     # @!attribute [r] last_name
-    #   @return [String] The account holder's last name.
+    #   @return [String] The user holder's last name.
     lazy_attributes :id, :username, :created, :suspended, :first_name,
                     :last_name, :password_expired, :nb_messages, :nb_files
     private :created, :suspended, :password_expired
@@ -50,13 +50,13 @@ class ContextIO
     end
 
     # @!attribute [r] created_at
-    #   @return [Time] The time this account was created (with Context.IO).
+    #   @return [Time] The time this user was created (with Context.IO).
     def created_at
       @created_at ||= Time.at(created)
     end
 
     # @!attribute [r] suspended_at
-    #   @return [Time] The time this account was suspended.
+    #   @return [Time] The time this user was suspended.
     def suspended_at
       return @suspended_at if instance_variable_defined?(:@suspended_at)
 
@@ -66,13 +66,13 @@ class ContextIO
     end
 
     # @!attribute [r] suspended?
-    #   @return [Boolean] Whether this account is currently suspended.
+    #   @return [Boolean] Whether this user is currently suspended.
     def suspended?
       !!suspended_at
     end
 
     # @!attribute [r] password_expired_at
-    #   @return [Time] The time this account's password expired.
+    #   @return [Time] The time this user's password expired.
     def password_expired_at
       return @password_expired_at if instance_variable_defined?(:@password_expired_at)
 
@@ -82,12 +82,12 @@ class ContextIO
     end
 
     # @!attribute [r] password_expired?
-    #   @return [Boolean] Whether this account's password is expired.
+    #   @return [Boolean] Whether this user's password is expired.
     def password_expired?
       !!password_expired_at
     end
 
-    # Updates the account.
+    # Updates the user.
     #
     # @param [Hash{String, Symbol => String}] options You can update first_name
     #   or last_name (or both).
