@@ -4,7 +4,7 @@ describe ContextIO::API do
   describe ".version" do
     subject { ContextIO::API }
 
-    it "uses API version 2.0" do
+    it "uses API version 2.0 by default" do
       expect(subject.version).to eq('2.0')
     end
   end
@@ -24,6 +24,11 @@ describe ContextIO::API do
       it "changes the API version used" do
         subject.version = '1.1'
         expect(subject.version).to eq('1.1')
+      end
+
+      it "can use the lite version when passed as an option" do
+        client = ContextIO::API.new(nil, nil, api_version: 'lite')
+        expect(client.version).to eq('lite')
       end
     end
   end

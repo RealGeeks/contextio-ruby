@@ -15,12 +15,12 @@ class ContextIO
     class Error < StandardError; end
 
     # @private
-    VERSION = '2.0'
+    @@version = '2.0'
 
     # @return [String] The version of the Context.IO API this version of the
     #   gem is intended for use with.
     def self.version
-      VERSION
+      @@version
     end
 
     # @private
@@ -71,7 +71,7 @@ class ContextIO
       @secret = secret
       @opts = opts || {}
       @base_url = self.class.base_url
-      @version = self.class.version
+      @version = opts[:api_version] || self.class.version
     end
 
     # Generates the path for a resource_path and params hash for use with the API.
