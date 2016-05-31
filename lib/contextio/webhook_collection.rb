@@ -9,6 +9,7 @@ class ContextIO
     self.association_name = :webhooks
 
     belongs_to :account
+    belongs_to :user
 
     def create(success_callback_url, failure_callback_url, options={})
       api_args = options.merge(

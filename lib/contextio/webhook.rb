@@ -8,6 +8,7 @@ class ContextIO
     self.association_name = :webhook
 
     belongs_to :account
+    belongs_to :user
 
     lazy_attributes :callback_url, :failure_notif_url, :active, :sync_period,
                     :failure, :webhook_id, :filter_to, :filter_from, :filter_cc,
