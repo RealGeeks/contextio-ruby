@@ -103,7 +103,7 @@ class ContextIO
       register_url ContextIO::FolderCollection do |folders|
         "accounts/#{folders.source.account.id}/sources/#{folders.source.label}/folders"
       end
-      
+
       register_url ContextIO::Folder do |folder|
         "accounts/#{folder.source.account.id}/sources/#{folder.source.label}/folders/#{folder.name}"
       end
@@ -132,7 +132,7 @@ class ContextIO
         if webhooks.account && webhooks.account.id
           "accounts/#{webhook.account.id}/webhooks/#{webhook.webhook_id}"
         elsif webhooks.user && webhooks.user.id
-          "accounts/#{webhook.user.id}/webhooks/#{webhook.webhook_id}"
+          "users/#{webhook.user.id}/webhooks/#{webhook.webhook_id}"
         end
       end
 
