@@ -129,10 +129,10 @@ class ContextIO
       end
 
       register_url ContextIO::Webhook do |webhook|
-        if webhooks.account && webhooks.account.id
+        if webhook.account && webhook.account.id
           "accounts/#{webhook.account.id}/webhooks/#{webhook.webhook_id}"
-        elsif webhooks.user && webhooks.user.id
-          "users/#{webhook.user.id}/webhooks/#{webhook.webhook_id}"
+        elsif webhook.user && webhook.user.id
+          "users/#{webhook.user.id}/webhook/#{webhook.webhook_id}"
         end
       end
 
