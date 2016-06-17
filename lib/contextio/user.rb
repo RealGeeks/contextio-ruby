@@ -9,7 +9,7 @@ class ContextIO
     self.primary_key = :id
     self.association_name = :user
 
-    has_many :sources
+    has_many :email_accounts
     has_many :connect_tokens
     has_many :messages
     has_many :threads

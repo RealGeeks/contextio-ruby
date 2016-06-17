@@ -92,6 +92,14 @@ class ContextIO
         'users'
       end
 
+      register_url ContextIO::EmailAccount do |email_account|
+        "users/#{email_account.user.id}/email_accounts/#{email_account.label}"
+      end
+
+      register_url ContextIO::EmailAccountCollection do |email_accounts|
+        "users/#{email_account.user.id}/email_accounts"
+      end
+
       register_url ContextIO::Source do |source|
         "accounts/#{source.account.id}/sources/#{source.label}"
       end
