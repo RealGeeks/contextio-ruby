@@ -11,7 +11,7 @@ class ContextIO
 
     # (see ContextIO#api)
     lazy_attributes :api, :source, :name, :attributes, :delim, :nb_messages,
-                :uidvalidity, :nb_unseen_messages
+                :uidvalidity, :nb_unseen_messages, :email_account
     private :attributes
 
     # @private
@@ -25,6 +25,7 @@ class ContextIO
     def initialize(api, options = {})
       @api = api
       @source = options.delete(:source) || options.delete('source')
+      @email_account = options.delete(:email_account) || options.delete('email_account')
 
       options.each do |key, value|
         key = key.to_s.gsub('-', '_')

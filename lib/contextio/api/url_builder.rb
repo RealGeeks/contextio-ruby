@@ -110,11 +110,19 @@ class ContextIO
       end
 
       register_url ContextIO::FolderCollection do |folders|
-        "accounts/#{folders.source.account.id}/sources/#{folders.source.label}/folders"
+        if folders.source && folders.source.account && folders.source.account.id
+          "accounts/#{folders.source.account.id}/sources/#{folders.source.label}/folders"
+        elsif folders.email_account && folders.email_account.user && folders.email_account.user.id
+          "users/#{folders.email_account.user.id}/email_accounts/#{folders.email_account.label}/folders"
+        end
       end
 
       register_url ContextIO::Folder do |folder|
-        "accounts/#{folder.source.account.id}/sources/#{folder.source.label}/folders/#{folder.name}"
+        if folder.source && folder.source.account && folder.source.account.id
+          "accounts/#{folder.source.account.id}/sources/#{folder.source.label}/folders/#{folder.name}"
+        elsif folder.email_account && folder.email_account.user && folder.email_account.user.id
+          "users/#{folder.email_account.user.id}/email_accounts/#{folder.email_account.label}/folders/#{folder.name}"
+        end
       end
 
       register_url ContextIO::Message do |message|
