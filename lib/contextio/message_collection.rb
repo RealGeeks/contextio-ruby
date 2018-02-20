@@ -9,6 +9,7 @@ class ContextIO
     self.association_name = :messages
 
     belongs_to :account
+    belongs_to :folder
 
     # You can pass a Folder object and this'll use the source from it, or you
     # can pass a folder label and a source label (from the API), if that's

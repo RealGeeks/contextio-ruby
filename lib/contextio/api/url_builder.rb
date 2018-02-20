@@ -126,11 +126,25 @@ class ContextIO
       end
 
       register_url ContextIO::Message do |message|
-        "accounts/#{message.account.id}/messages/#{message.message_id}"
+        if api.version == '2.0'
+          "accounts/#{message.account.id}/messages/#{message.message_id}"
+        elsif api.version == 'lite' && message.try(:folder).try(:email_account).try(:user).try(:id)
+          url = "users/#{message.folder.email_account.user.id}/"
+          url += "email_accounts/#{message.folder.email_account.label}/"
+          url += "folders/#{message.folder}/"
+          url += "messages/#{message.message_id}"
+        end
       end
 
       register_url ContextIO::MessageCollection do |messages|
-        "accounts/#{messages.account.id}/messages"
+        if messages.account && messages.account.id
+          "accounts/#{messages.account.id}/messages"
+        elsif messages.try(:folder).try(:email_account).try(:user).try(:id)
+          url = "users/#{message.folder.email_account.user.id}/"
+          url += "email_accounts/#{message.folder.email_account.label}/"
+          url += "folders/#{message.folder}/"
+          url += "messages"
+        end
       end
 
       register_url ContextIO::BodyPartCollection do |parts|

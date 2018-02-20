@@ -8,11 +8,12 @@ class ContextIO
     self.association_name = :message
 
     belongs_to :account
+    belongs_to :folder
     has_many :sources
     has_many :body_parts
     has_many :files
 
-    lazy_attributes :date, :folders, :addresses, :subject, :list_help,
+    lazy_attributes :date, :folders, :folder, :addresses, :subject, :list_help,
                     :list_unsubscribe, :message_id, :email_message_id,
                     :gmail_message_id, :gmail_thread_id, :person_info,
                     :date_received, :date_indexed, :in_reply_to, :references

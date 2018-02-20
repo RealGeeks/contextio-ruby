@@ -53,9 +53,12 @@ class ContextIO
     end
 
     def messages
-      association_class = ContextIO::API::AssociationHelpers.class_for_association_name(:messages)
-
-      @messages ||= association_class.new(api, account: source.account).where(folder: self.name)
+        association_class = ContextIO::API::AssociationHelpers.class_for_association_name(:messages)
+      if source
+        @messages ||= association_class.new(api, account: source.account).where(folder: self.name)
+      elsif email_account
+        @messages ||= association_class.new(api, folder: email_account).where(folder: self.name)
+      end
     end
   end
 end
